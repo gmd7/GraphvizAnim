@@ -7,6 +7,15 @@ N = ["Start", "A","B", "C", "Ziel"]
 G = {N[0]:[N[1],N[2],N[3]], N[1]:[], N[2]:[N[3],N[1]], N[3]:[N[4]], N[4]:[]}
 goal = N[4]
 
+pre = dict()
+
+def color_path(u):
+    try:
+        ga.highlight_edge(pre[u],u,color="magenta")
+        color_path(pre[u])
+    except:
+        pass
+
 ga = Animation()
 for v, adj in G.items():
     for u in adj:
@@ -19,23 +28,24 @@ fringe.put(N[0])
 
 while not fringe.empty():
     v = fringe.get()
+    color_path(v)
     if v == goal:
+        ga.highlight_node( v, color = 'green' )
         break
-    ga.highlight_node( v, color = 'yellow' )
+    ga.highlight_node( v, color = 'magenta' )
     ga.next_step()
     seen[ v ] = True
     ga.highlight_node( v, color = 'red' )
-    print "   ",v,":",
     for u in G[ v ]:
         if not seen[ u ]:
-            print u,
             ga.highlight_node( u, color = 'blue')
             fringe.put(u)
-    print ""
+            seen [u] = True
+            pre[u] = v
     ga.next_step()
 
+
+
 graphs = ga.graphs()
-for g in graphs:
-    print g
-files = render( graphs, 'dfv', 'png' )
-gif( files, 'dfv', 200 )
+files = render( graphs, 'bfs', 'png' )
+gif( files, 'bfs', 200 )
