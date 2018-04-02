@@ -27,13 +27,19 @@ class ParseException( Exception ):
 
 class Step( object ):
 
-	def __init__( self, step = None ):
+	def __init__( self, step = None , copy_hV = True, copy_hE = False):
 		if step:
 			self.V = step.V.copy()
 			self.E = step.E.copy()
 			self.L = step.L.copy()
-			self.hV = step.hV.copy()
-			self.hE = step.hE.copy()
+			if copy_hV:
+				self.hV = step.hV.copy()
+			else:
+				self.hV = dict()
+			if copy_hE:
+				self.hE = step.hE.copy()
+			else:
+				self.hE = dict()
 		else:
 			self.V = set()
 			self.E = set()
@@ -69,7 +75,7 @@ class Animation( object ):
 	def __init__( self ):
 		self._actions = []
 
-	def next_step( self, clean = False ):
+	def next_step( self, clean = False):
 		self._actions.append( action.NextStep( clean ) )
 
 	def add_node( self, v ):
