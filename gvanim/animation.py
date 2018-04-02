@@ -32,12 +32,14 @@ class Step( object ):
 			self.V = step.V.copy()
 			self.E = step.E.copy()
 			self.L = step.L.copy()
+			self.hV = step.hV.copy()
+			self.hE = step.hE.copy()
 		else:
 			self.V = set()
 			self.E = set()
 			self.L = dict()
-		self.hV = dict()
-		self.hE = dict()
+			self.hV = dict()
+			self.hE = dict()
 
 	def node_format( self, v ):
 		fmt = []
@@ -116,7 +118,6 @@ class Animation( object ):
 				raise ParseException( 'unrecognized command: {}'.format( action ) )
 			except TypeError:
 				raise ParseException( 'wrong number of parameters: {}'.format( line.strip() ) )
-				return
 
 	def steps( self ):
 		steps = [ Step() ]
