@@ -93,8 +93,8 @@ class Animation( object ):
 	def remove_node( self, v ):
 		self._actions.append( action.RemoveNode( v ) )
 
-	def add_edge( self, u, v ):
-		self._actions.append( action.AddEdge( u, v ) )
+	def add_edge( self, u, v , **kwargs):
+		self._actions.append( action.AddEdge( u, v, **kwargs ) )
 
 	def highlight_edge( self, u, v, color = 'red' ):
 		self._actions.append( action.HighlightEdge( u, v, color = color ) )
@@ -131,7 +131,7 @@ class Animation( object ):
 			action( steps )
 		return steps
 
-	def graphs( self ):
+	def graphs( self, layout = 'neato' ):
 		steps = self.steps()
 		V, E = set(), set()
 		for step in steps:
@@ -140,6 +140,8 @@ class Animation( object ):
 		graphs = []
 		for n, s in enumerate( steps ):
 			graph = [ 'digraph G {' ]
+			graph.append('layout="{}"'.format(layout))
+			graph.append('ordering=out;')
 			for v in V: graph.append( '"{}" {};'.format( quote( str( v ) ), s.node_format( v ) ) )
 			for e in E: graph.append( '"{}" -> "{}" {};'.format( quote( str( e[ 0 ] ) ), quote( str( e[ 1 ] ) ), s.edge_format( e ) ) )
 			graph.append( '}' )

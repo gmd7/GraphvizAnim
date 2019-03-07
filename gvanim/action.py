@@ -74,7 +74,8 @@ class RemoveNode( object ):
 				del steps[ -1 ].hE[ e ]
 
 class AddEdge( object ):
-	def __init__( self, u, v ):
+	def __init__( self, u, v, **kwargs ):
+		#xxx
 		self.u = u
 		self.v = v
 	def __call__( self, steps ):

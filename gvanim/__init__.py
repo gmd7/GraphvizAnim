@@ -15,7 +15,9 @@
 # You should have received a copy of the GNU General Public License along with
 # "GraphvizAnim". If not, see <http://www.gnu.org/licenses/>.
 
-from __future__ import absolute_import
+# from __future__ import absolute_import
 
 from gvanim.animation import Animation
-from gvanim.render import render, gif
+from gvanim.render import render, gif, slides, addQueueState
+
+

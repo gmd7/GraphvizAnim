@@ -16,18 +16,18 @@
 # "GraphvizAnim". If not, see <http://www.gnu.org/licenses/>.
 
 from __future__ import absolute_import
-
+import itertools
 from subprocess import Popen, PIPE, STDOUT, call
 from multiprocessing import Pool, cpu_count
 
 def _render( params ):
 	path, fmt, size, graph = params
 	with open( path , 'w' ) as out:
-		pipe = Popen( [ 'dot',  '-Gsize=1,1!', '-Gdpi={}'.format( size ), '-T', fmt ], stdout = out, stdin = PIPE, stderr = None )
+		pipe = Popen( [ 'dot', '-T', fmt ], stdout = out, stdin = PIPE, stderr = None )
 		pipe.communicate( input = graph.encode() )
 	return path
 
-def render( graphs, basename, fmt = 'png', size = 320 ):
+def render( graphs, basename, fmt = 'png', size = 800 ):
 	try:
 		_map = Pool( processes = cpu_count() ).map
 	except NotImplementedError:
@@ -40,3 +40,49 @@ def gif( files, basename, delay = 100 ):
 		cmd.extend( ( '-delay', str( delay ), file ) )
 	cmd.append( basename + '.gif' )
 	call( cmd )
+
+def addQueueState( queueStates, message=None):
+    if message != None:
+        text = "\n" + message + "\n"
+    else:
+        text = ""
+    queueStates.append( text )
+
+def slides( files1, files2, queueStates, basename, width=1920, height=1080):
+
+	file = open(basename+".md","w")
+	mdpre = "\n".join(
+		[
+		"---",
+		"presentation:",
+		"  theme: serif.css",
+		"  width: {}".format(width),
+	  	"  height: {}".format(height),
+		"  transition: 'none'",
+		"  transitionSpeed: 'fast'",
+	  	"  backgroundTransition: 'none'",
+		"  overview: true",
+		"  progress: true",
+		"  slideNumber: true",
+		"---",
+		""
+		])
+
+	file.write(mdpre)
+
+	for file1,file2, queueState in itertools.izip(files1,files2,queueStates):
+		md = [
+			'',
+			'<!-- slide -->',
+		 	 "{}".format(queueState),
+			'<div class="columns">',
+			'   <div class="column" width="50%">',
+			"![]({})".format(file1)+'{'+"width={0} height={1}".format(width*45/100,height*70/100)+'}',
+			'   </div>',
+			'   <div class="column" width="50%">',
+			"![]({})".format(file2)+'{'+"width={0} height={1}".format(width*45/100,height*70/100)+'}',
+			'   </div>',
+			'</div>'
+		]
+		file.write("\n".join(md))
+	file.close()

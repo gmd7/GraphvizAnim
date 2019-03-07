@@ -21,7 +21,7 @@ ga = Animation()
 gb = Animation()
 
 seen = { v:False for v in  N }
-fringe = Queue.Queue()
+fringe = Queue.LifoQueue()
 
 queuename = ""
 if isinstance( fringe, Queue.LifoQueue):
@@ -31,11 +31,17 @@ elif isinstance( fringe, Queue.Queue):
 
 queueStates = []
 
+def add_text_to_queue_states(message):
+    addQueueState(queueStates, '\n' + message + '\n\n' + queuename + ': in,out <-> [ ' + " ".join(reversed(list(fringe.queue))) + " ]\n")
+
+
+queueStates = []
+
 for v, adj in G.items():
     for u in adj:
         ga.add_edge( v, u )
 
-addQueueState(fringe, queueStates,"0. Startknoten *" + start + "* auf " + queuename + " legen")
+add_text_to_queue_states("0. Startknoten *" + start + "* auf " + queuename + " legen")
 
 ga.next_step()
 gb.next_step()
@@ -47,7 +53,7 @@ gb.add_node(start)
 ga.highlight_node( start, color = 'blue')
 gb.highlight_node( start, color = 'blue')
 
-addQueueState(fringe, queueStates,"0. Startknoten *" + start + "* liegt auf " + queuename)
+add_text_to_queue_states("0. Startknoten *" + start + "* liegt auf " + queuename)
 
 ga.next_step()
 gb.next_step()
@@ -60,7 +66,7 @@ while not fringe.empty():
         ga.highlight_node( v, color = 'green' )
         gb.highlight_node( v, color = 'green' )
 
-        addQueueState(fringe, queueStates, "1. Knoten *" + v + "* von " + queuename + " nehmen. Zielknoten -> ENDE")
+        add_text_to_queue_states("1. Knoten *" + v + "* von " + queuename + " nehmen. Zielknoten -> ENDE")
 
         ga.next_step()
         gb.next_step()
@@ -69,7 +75,7 @@ while not fringe.empty():
         ga.highlight_node( v, color = 'magenta' )
         gb.highlight_node( v, color = 'magenta' )
 
-        addQueueState(fringe, queueStates, "1. Knoten *" + v + "* von " + queuename + " nehmen")
+        add_text_to_queue_states("1. Knoten *" + v + "* von " + queuename + " nehmen")
 
         ga.next_step()
         gb.next_step()
@@ -82,7 +88,7 @@ while not fringe.empty():
         color_path(v, ga)
         color_path(v, gb)
 
-        addQueueState(fringe, queueStates, "2. Knoten *" + v + "* ist kein Zielknoten")
+        add_text_to_queue_states("2. Knoten *" + v + "* ist kein Zielknoten")
 
         ga.next_step()
         gb.next_step()
@@ -97,13 +103,12 @@ while not fringe.empty():
                 gb.highlight_node( u, color = 'blue')
 
                 fringe.put(u)
-                seen [u] = True
                 pre[u] = v
 
         color_path(v, ga)
         color_path(v, gb)
 
-        addQueueState(fringe, queueStates, "3. Kindknoten von *" + v + "* auf " + queuename + " legen.")
+        add_text_to_queue_states( "3. Kindknoten von *" + v + "* auf " + queuename + " legen.")
 
         ga.next_step()
         gb.next_step()

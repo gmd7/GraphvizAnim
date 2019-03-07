@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <title>search_dfs_1</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="https://revealjs.com/css/reveal.css">
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <link rel="stylesheet" href="https://revealjs.com/css/theme/black.css" id="theme">
+  <!-- Printing and PDF exports -->
+  <script>
+    var link = document.createElement( 'link' );
+    link.rel = 'stylesheet';
+    link.type = 'text/css';
+    link.href = window.location.search.match( /print-pdf/gi ) ? 'https://revealjs.com/css/print/pdf.css' : 'https://revealjs.com/css/print/paper.css';
+    document.getElementsByTagName( 'head' )[0].appendChild( link );
+  </script>
+  <!--[if lt IE 9]>
+  <script src="https://revealjs.com/lib/js/html5shiv.js"></script>
+  <![endif]-->
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+
+<section class="slide level6">
+
+<!-- slide -->
+<ol start="0" type="1">
+<li>Startknoten <em>Start</em> auf Stack legen</li>
+</ol>
+<p>Stack: in,out &lt;-&gt; [ ]</p>
+<p>closed set: []</p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<img data-src="search_dfs_1_graph_000.svg" width="864" height="756" />
+</div><div class="column" style="width:50%;">
+<img data-src="search_dfs_1_tree_000.svg" width="864" height="756" />
+</div>
+</div>
+<!-- slide -->
+<ol start="0" type="1">
+<li>Startknoten <em>Start</em> liegt auf Stack</li>
+</ol>
+<p>Stack: in,out &lt;-&gt; [ Start ]</p>
+<p>closed set: []</p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<img data-src="search_dfs_1_graph_001.svg" width="864" height="756" />
+</div><div class="column" style="width:50%;">
+<img data-src="search_dfs_1_tree_001.svg" width="864" height="756" />
+</div>
+</div>
+<!-- slide -->
+<ol type="1">
+<li>Knoten <em>Start</em> von Stack nehmen</li>
+</ol>
+<p>Stack: in,out &lt;-&gt; [ ]</p>
+<p>closed set: []</p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<img data-src="search_dfs_1_graph_002.svg" width="864" height="756" />
+</div><div class="column" style="width:50%;">
+<img data-src="search_dfs_1_tree_002.svg" width="864" height="756" />
+</div>
+</div>
+<!-- slide -->
+<ol start="2" type="1">
+<li>Knoten <em>Start</em> ist kein Zielknoten</li>
+</ol>
+<p>Stack: in,out &lt;-&gt; [ ]</p>
+<p>closed set: [‘Start’]</p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<img data-src="search_dfs_1_graph_003.svg" width="864" height="756" />
+</div><div class="column" style="width:50%;">
+<img data-src="search_dfs_1_tree_003.svg" width="864" height="756" />
+</div>
+</div>
+<!-- slide -->
+<ol start="3" type="1">
+<li>Kindknoten von <em>Start</em> auf Stack legen.</li>
+</ol>
+<p>Stack: in,out &lt;-&gt; [ F D B ]</p>
+<p>closed set: [‘Start’]</p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<img data-src="search_dfs_1_graph_004.svg" width="864" height="756" />
+</div><div class="column" style="width:50%;">
+<img data-src="search_dfs_1_tree_004.svg" width="864" height="756" />
+</div>
+</div>
+<!-- slide -->
+<ol type="1">
+<li>Knoten <em>F</em> von Stack nehmen</li>
+</ol>
+<p>Stack: in,out &lt;-&gt; [ D B ]</p>
+<p>closed set: [‘Start’]</p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<img data-src="search_dfs_1_graph_005.svg" width="864" height="756" />
+</div><div class="column" style="width:50%;">
+<img data-src="search_dfs_1_tree_005.svg" width="864" height="756" />
+</div>
+</div>
+<!-- slide -->
+<ol start="2" type="1">
+<li>Knoten <em>F</em> ist kein Zielknoten</li>
+</ol>
+<p>Stack: in,out &lt;-&gt; [ D B ]</p>
+<p>closed set: [‘F’, ‘Start’]</p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<img data-src="search_dfs_1_graph_006.svg" width="864" height="756" />
+</div><div class="column" style="width:50%;">
+<img data-src="search_dfs_1_tree_006.svg" width="864" height="756" />
+</div>
+</div>
+<!-- slide -->
+<ol start="3" type="1">
+<li>Kindknoten von <em>F</em> auf Stack legen.</li>
+</ol>
+<p>Stack: in,out &lt;-&gt; [ D D B ]</p>
+<p>closed set: [‘F’, ‘Start’]</p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<img data-src="search_dfs_1_graph_007.svg" width="864" height="756" />
+</div><div class="column" style="width:50%;">
+<img data-src="search_dfs_1_tree_007.svg" width="864" height="756" />
+</div>
+</div>
+<!-- slide -->
+<ol type="1">
+<li>Knoten <em>D</em> von Stack nehmen</li>
+</ol>
+<p>Stack: in,out &lt;-&gt; [ D B ]</p>
+<p>closed set: [‘F’, ‘Start’]</p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<img data-src="search_dfs_1_graph_008.svg" width="864" height="756" />
+</div><div class="column" style="width:50%;">
+<img data-src="search_dfs_1_tree_008.svg" width="864" height="756" />
+</div>
+</div>
+<!-- slide -->
+<ol start="2" type="1">
+<li>Knoten <em>D</em> ist kein Zielknoten</li>
+</ol>
+<p>Stack: in,out &lt;-&gt; [ D B ]</p>
+<p>closed set: [‘D’, ‘F’, ‘Start’]</p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<img data-src="search_dfs_1_graph_009.svg" width="864" height="756" />
+</div><div class="column" style="width:50%;">
+<img data-src="search_dfs_1_tree_009.svg" width="864" height="756" />
+</div>
+</div>
+<!-- slide -->
+<ol start="3" type="1">
+<li>Kindknoten von <em>D</em> auf Stack legen.</li>
+</ol>
+<p>Stack: in,out &lt;-&gt; [ E C D B ]</p>
+<p>closed set: [‘D’, ‘F’, ‘Start’]</p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<img data-src="search_dfs_1_graph_010.svg" width="864" height="756" />
+</div><div class="column" style="width:50%;">
+<img data-src="search_dfs_1_tree_010.svg" width="864" height="756" />
+</div>
+</div>
+<!-- slide -->
+<ol type="1">
+<li>Knoten <em>E</em> von Stack nehmen</li>
+</ol>
+<p>Stack: in,out &lt;-&gt; [ C D B ]</p>
+<p>closed set: [‘D’, ‘F’, ‘Start’]</p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<img data-src="search_dfs_1_graph_011.svg" width="864" height="756" />
+</div><div class="column" style="width:50%;">
+<img data-src="search_dfs_1_tree_011.svg" width="864" height="756" />
+</div>
+</div>
+<!-- slide -->
+<ol start="2" type="1">
+<li>Knoten <em>E</em> ist kein Zielknoten</li>
+</ol>
+<p>Stack: in,out &lt;-&gt; [ C D B ]</p>
+<p>closed set: [‘D’, ‘E’, ‘F’, ‘Start’]</p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<img data-src="search_dfs_1_graph_012.svg" width="864" height="756" />
+</div><div class="column" style="width:50%;">
+<img data-src="search_dfs_1_tree_012.svg" width="864" height="756" />
+</div>
+</div>
+<!-- slide -->
+<ol start="3" type="1">
+<li>Kindknoten von <em>E</em> auf Stack legen.</li>
+</ol>
+<p>Stack: in,out &lt;-&gt; [ C C D B ]</p>
+<p>closed set: [‘D’, ‘E’, ‘F’, ‘Start’]</p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<img data-src="search_dfs_1_graph_013.svg" width="864" height="756" />
+</div><div class="column" style="width:50%;">
+<img data-src="search_dfs_1_tree_013.svg" width="864" height="756" />
+</div>
+</div>
+<!-- slide -->
+<ol type="1">
+<li>Knoten <em>C</em> von Stack nehmen</li>
+</ol>
+<p>Stack: in,out &lt;-&gt; [ C D B ]</p>
+<p>closed set: [‘D’, ‘E’, ‘F’, ‘Start’]</p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<img data-src="search_dfs_1_graph_014.svg" width="864" height="756" />
+</div><div class="column" style="width:50%;">
+<img data-src="search_dfs_1_tree_014.svg" width="864" height="756" />
+</div>
+</div>
+<!-- slide -->
+<ol start="2" type="1">
+<li>Knoten <em>C</em> ist kein Zielknoten</li>
+</ol>
+<p>Stack: in,out &lt;-&gt; [ C D B ]</p>
+<p>closed set: [‘C’, ‘D’, ‘E’, ‘F’, ‘Start’]</p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<img data-src="search_dfs_1_graph_015.svg" width="864" height="756" />
+</div><div class="column" style="width:50%;">
+<img data-src="search_dfs_1_tree_015.svg" width="864" height="756" />
+</div>
+</div>
+<!-- slide -->
+<ol start="3" type="1">
+<li>Kindknoten von <em>C</em> auf Stack legen.</li>
+</ol>
+<p>Stack: in,out &lt;-&gt; [ Ziel C D B ]</p>
+<p>closed set: [‘C’, ‘D’, ‘E’, ‘F’, ‘Start’]</p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<img data-src="search_dfs_1_graph_016.svg" width="864" height="756" />
+</div><div class="column" style="width:50%;">
+<img data-src="search_dfs_1_tree_016.svg" width="864" height="756" />
+</div>
+</div>
+<!-- slide -->
+<ol type="1">
+<li>Knoten <em>Ziel</em> von Stack nehmen. Zielknoten -&gt; ENDE</li>
+</ol>
+<p>Stack: in,out &lt;-&gt; [ C D B ]</p>
+<p>closed set: [‘C’, ‘D’, ‘E’, ‘F’, ‘Start’]</p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<img data-src="search_dfs_1_graph_017.svg" width="864" height="756" />
+</div><div class="column" style="width:50%;">
+<img data-src="search_dfs_1_tree_017.svg" width="864" height="756" />
+</div>
+</div>
+</section>
+    </div>
+  </div>
+
+  <script src="https://revealjs.com/lib/js/head.min.js"></script>
+  <script src="https://revealjs.com/js/reveal.js"></script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        // Push each slide change to the browser history
+        history: true,
+
+        // Optional reveal.js plugins
+        dependencies: [
+          { src: 'https://revealjs.com/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+          { src: 'https://revealjs.com/plugin/zoom-js/zoom.js', async: true },
+          { src: 'https://revealjs.com/plugin/notes/notes.js', async: true }
+        ]
+      });
+    </script>
+    </body>
+</html>
