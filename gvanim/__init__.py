@@ -19,5 +19,6 @@
 
 from gvanim.animation import Animation
 from gvanim.render import render, gif, slides, addQueueState
+from gvanim.graph import *
 
 

@@ -70,7 +70,7 @@ def slides( files1, files2, queueStates, basename, width=1920, height=1080):
 
 	file.write(mdpre)
 
-	for file1,file2, queueState in itertools.izip(files1,files2,queueStates):
+	for file1,file2, queueState in zip(files1,files2,queueStates):
 		md = [
 			'',
 			'<!-- slide -->',

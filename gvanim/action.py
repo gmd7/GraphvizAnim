@@ -36,24 +36,6 @@ class HighlightNode( object ):
 		steps[ -1 ].V.add( self.v )
 		steps[ -1 ].hV[ self.v ] = self.color
 
-class LabelNode( object ):
-	def __init__( self, v, label ):
-		self.v = v
-		self.label = label
-	def __call__( self, steps ):
-		steps[ -1 ].V.add( self.v )
-		steps[ -1 ].L[ self.v ] = self.label
-
-class UnlabelNode( object ):
-	def __init__( self, v ):
-		self.v = v
-	def __call__( self, steps ):
-		steps[ -1 ].V.add( self.v )
-		try:
-			del steps[ -1 ].L[ self.v ]
-		except KeyError:
-			pass
-
 class RemoveNode( object ):
 	def __init__( self, v ):
 		self.v = v
@@ -63,10 +45,6 @@ class RemoveNode( object ):
 			del steps[ -1 ].hV[ self.v ]
 		except KeyError:
 			pass
-		try:
-			del steps[ -1 ].L[ self.v ]
-		except KeyError:
-			pass
 		dE = set( e for e in steps[ -1 ].E if self.v in e )
 		steps[ -1 ].E -= dE
 		for e in list(steps[ -1 ].hE.keys()):
@@ -74,30 +52,26 @@ class RemoveNode( object ):
 				del steps[ -1 ].hE[ e ]
 
 class AddEdge( object ):
-	def __init__( self, u, v, **kwargs ):
-		#xxx
-		self.u = u
-		self.v = v
+	def __init__( self, edge, **kwargs ):
+		self.u = edge.getFrom()
+		self.v = edge.getTo()
+		self.weight = edge.getWeight()
 	def __call__( self, steps ):
 		steps[ -1 ].V.add( self.u )
 		steps[ -1 ].V.add( self.v )
-		steps[ -1 ].E.add( ( self.u, self.v ) )
+		steps[ -1 ].E.add( ( self.u, self.v, self.weight ) )
 
-class HighlightEdge( object ):
-	def __init__( self, u, v, color = 'red' ):
-		self.u = u
-		self.v = v
-		self.color = color
+class HighlightEdge( AddEdge ):
+	def __init__( self, edge, color = 'red' ):
+		super(AddEdge, self).__init__(edge)
 	def __call__( self, steps ):
-		steps[ -1 ].V.add( self.u )
-		steps[ -1 ].V.add( self.v )
-		steps[ -1 ].E.add( ( self.u, self.v ) )
+		super(AddEdge, self).__call__(steps)
 		steps[ -1 ].hE[ ( self.u, self.v ) ] = self.color
 
 class RemoveEdge( object ):
-	def __init__( self, u, v ):
-		self.u = u
-		self.v = v
+	def __init__( self, edge ):
+		self.u = edge.getFrom()
+		self.v = edge.getTo()
 	def __call__( self, steps ):
 		steps[ -1 ].E.discard( ( self.u, self.v ) )
 		try:

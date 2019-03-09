@@ -1,204 +1,171 @@
+from queue import PriorityQueue, LifoQueue, Queue
+
 import gvanim
 from gvanim.animation import Animation
 from gvanim.render import render, gif, slides, addQueueState
+from queue import *
+from gvanim.graph import *
+import os
 
-import Queue, os
-
-# Wege Statt Zustande der QueueStack, Doppelte Knoten vom Stak entfernen und im Baum markieren
-#
-
-#G = {N[0]:[N[1],N[2],N[3]], N[1]:[N[2]], N[2]:[N[1],N[3],N[5]], N[3]:[N[4]], N[4]:[]}
-#N = ["Start", "A", "B", "C", "Ziel"]
-#goal = N[4]
-#G = {N[0]:[(3,N[1]),(6,N[2]),(2,N[3])], N[1]:[(2,N[2])], N[2]:[(3,N[1]),(1,N[3]),(4,N[5])], N[3]:[(4,N[4])], N[4]:[]}
-#N = ["Start", "A", "B", "C", "D", "Ziel"]
-#G = {N[0]:[N[1],N[3]], N[3]:[N[2]], N[2]:[N[1],N[3],N[5]], N[1]:[N[4]], N[4]:[N[6]],N[5]:[N[1],N[4]],N[6]:[N[1],N[7]]}
-#N = ["Start", "A", "B", "C", "D", "E", "F", "Ziel"]
-#goal = N[7]
-
-# s = "Start"
-# a=s
-# b = "B"
-# c = "C"
-# d = "D"
-# e = "E"
-# f = "F"
-# z = "Ziel"
-# N = [s,b,c,d,e,f,z]
-# G = {s:[b,f],b:{a,e,z},c:{d,z},d:{c,e,f},e:{a,b,d},f:{a,b,d},z:{b,c}}
-
-s = "Start"
-a=s
-b = "B"
-c = "C"
-d = "D"
-e = "E"
-f = "F"
-z = "Ziel"
-N = [s,b,c,d,e,f,z]
-G = {s:[b,d,f],b:{d},c:{z},d:{c,e},e:{s,c,f},f:{d},z:{b,c}}
+graph_id = 3
+g = Graph()
+start = g.add_new_vertex("Start", 1)
+a = g.add_new_vertex("B", 2)
+b = g.add_new_vertex("C", 3)
+c = g.add_new_vertex("D", 4)
+d = g.add_new_vertex("E", 5)
+e = g.add_new_vertex("F", 6)
+goal = g.add_new_vertex("Ziel", 7)
+g.add_edge(Edge(start, a, 20))
+g.add_edge(Edge(start, b, 10))
+g.add_edge(Edge(a, c, 12))
+g.add_edge(Edge(b, d, 9))
+g.add_edge(Edge(c, e, 14))
+g.add_edge(Edge(e, goal, 11))
+g.add_edge(Edge(c, d, 11))
 
 
-start = s
-goal = z
+path = []
 
-id = 1
 
-prea = dict()
-preb = dict()
+def color_path(path, animation, path_color="magenta"):
+    for edge in path:
+        try:
+            animation.highlight_edge(edge, color=path_color)
+        except:
+            pass
 
-def color_path(u, pre, animation, path_color = "magenta"):
-    try:
-        animation.highlight_edge(pre[u],u,color=path_color)
-        color_path(pre[u], pre, animation)
-    except:
-        pass
 
-ga = Animation()
-gb = Animation()
+graph_animation = Animation()
+decision_tree_animation = Animation()
 
-seen = { v:False for v in  N }
+print(g.get_vertices())
 
-fringe = Queue.LifoQueue()
-#fringe = Queue.Queue()
-#fringe = Queue.PriorityQueue()
+seen = {v: False for v in g.get_vertices()}
+
+# fringe = LifoQueue()
+# fringe = Queue()
+
+fringe = Queue()
 
 def outputState():
-    listseen = [k for k in seen if seen[k] == True ]
+    listseen = [k.label for k in seen if seen[k] == True]
     listseen.sort()
-    print (listseen, "\t", list(fringe.queue))
+    # print(listseen, "\t", list(fringe.queue))
+
 
 def getSeen():
-    listseen = [k for k in seen if seen[k] == True ]
+    listseen = [k.label for k in seen if seen[k] == True]
     listseen.sort()
     return listseen
 
+
 queuename = ""
-if isinstance( fringe, Queue.LifoQueue):
+if isinstance(fringe, LifoQueue):
     queuename = "Stack"
     queuepre = ': in,out <-> [ '
     queuepost = " ]\n"
     basename = "search_dfs_"
-elif isinstance( fringe, Queue.PriorityQueue):
+elif isinstance(fringe, PriorityQueue):
     queuename = "Priority Queue"
     queuepre = ': in -> [ '
     queuepost = " ] -> out\n"
     basename = "search_ucs_"
-elif isinstance( fringe, Queue.Queue):
+elif isinstance(fringe, Queue):
     queuename = "Queue"
     queuepre = ': in -> [ '
     queuepost = " ] -> out\n"
     basename = "search_bfs_"
 
-basename += str(id)
+basename += str(graph_id)
 
 queueStates = []
+
 
 def add_text_to_queue_states(message):
-    addQueueState(queueStates, '\n' + message + '\n\n' + queuename + queuepre +  " ".join(reversed([n["label"] for n in list(fringe.queue)])) + queuepost+'\n\n' + "closed set: " + str( getSeen()))
+    addQueueState(queueStates, '\n' + message + '\n\n' + queuename + queuepre + " ".join(
+        reversed([n.label for n in list(fringe.queue)])) + queuepost + '\n\n' + "besucht: " + str(getSeen()))
 
 
 queueStates = []
 
-for v, adj in G.items():
-    for u in adj:
-        ga.add_edge( v, u )
+for v in g.edges.keys():
+    for e in g.edges[v]:
+        graph_animation.add_edge(e)
 
-add_text_to_queue_states("0. Startknoten *" + start + "* auf " + queuename + " legen")
+add_text_to_queue_states("0. Startknoten *" + start.label + "* auf " + queuename + " legen")
 
 outputState()
-ga.next_step()
-gb.next_step()
+graph_animation.next_step()
 
+fringe.put(start)
 
-k=0
-node = {"id":"n"+str(k), "label":start}
-fringe.put(node)
+graph_animation.add_node(start)
+graph_animation.highlight_node(start, color='blue')
 
-gb.add_node(node["id"])
-gb.label_node(node["id"],node["label"])
-
-ga.highlight_node( node["label"], color = 'blue')
-gb.highlight_node( node["id"], color = 'blue')
-
-add_text_to_queue_states("0. Startknoten *" + start + "* liegt auf " + queuename)
+add_text_to_queue_states("0. Startknoten *" + start.label + "* liegt auf " + queuename)
 
 outputState()
 
-ga.next_step()
-gb.next_step()
+graph_animation.next_step()
 
 while not fringe.empty():
     v = fringe.get()
-    color_path(v["label"], prea, ga)
-    color_path(v["id"], preb, gb)
+    color_path(path, graph_animation)
 
-    if v["label"] == goal:
-        ga.highlight_node( v["label"], color = 'green' )
-        gb.highlight_node( v["id"], color = 'green' )
-
-        add_text_to_queue_states("1. Knoten *" + v["label"] + "* von " + queuename + " nehmen. Zielknoten -> ENDE")
+    if v == goal:
+        print("goal reached")
+        graph_animation.highlight_node(v, color='green')
+        add_text_to_queue_states("1. Knoten *" + v.label + "* von " + queuename + " nehmen. Zielknoten -> ENDE")
 
         outputState()
-        ga.next_step()
-        gb.next_step()
+        graph_animation.next_step()
         break
-    elif not seen[v["label"]]:
-        ga.highlight_node( v["label"], color = 'magenta' )
-        gb.highlight_node( v["id"], color = 'magenta' )
 
-        add_text_to_queue_states("1. Knoten *" + v["label"] + "* von " + queuename + " nehmen")
+    elif not seen[v]:
+        print("Neighbours -> fringe")
+        graph_animation.highlight_node(v, color='magenta')
+
+        add_text_to_queue_states("1. Knoten *" + v.label + "* von " + queuename + " nehmen")
         outputState()
-        ga.next_step()
-        gb.next_step()
+        graph_animation.next_step()
 
-        seen[ v["label"] ] = True
+        seen[v] = True
 
-        ga.highlight_node( v["label"], color = 'red' )
-        gb.highlight_node( v["id"], color = 'red' )
+        graph_animation.highlight_node(v, color='red')
 
-        color_path(v["label"], prea, ga)
-        color_path(v["id"], preb, gb)
+        color_path(path, graph_animation)
 
-        add_text_to_queue_states("2. Knoten *" + v["label"] + "* ist kein Zielknoten")
+        add_text_to_queue_states("2. Knoten *" + v.label + "* ist kein Zielknoten")
 
         outputState()
-        ga.next_step()
-        gb.next_step()
+        graph_animation.next_step()
 
+        for edge in g.edges[v]:
+            u = edge.to
+            if not seen[u]:
+                graph_animation.add_node(u)
+                graph_animation.add_edge(edge)
 
-        for u in G[ v["label"] ]:
-            if not seen[ u ]:
-                k=k+1
-                node = {"id" : "n"+str(k), "label" : u}
-                gb.add_node(node["id"])
-                gb.label_node(node["id"], node["label"])
-                gb.add_edge(v["id"], node["id"])
+                graph_animation.highlight_node(u, color='blue')
 
-                ga.highlight_node( u, color = 'blue')
-                gb.highlight_node( node["id"], color = 'blue')
-
-                fringe.put(node)
-                #if isinstance( fringe, Queue.Queue):
+                fringe.put(u)
+                print("put neighbor on fringe")
+                # if isinstance( fringe, Queue.Queue):
                 #    seen [u] = True
-                prea[node["label"]] = v["label"]
-                preb[node["id"]] = v["id"]
+                path.append(edge)
 
-        color_path(v["label"], ga, prea)
-        color_path(v["id"], gb,preb)
+        color_path(path, graph_animation)
 
-        add_text_to_queue_states( "3. Kindknoten von *" + v["label"] + "* auf " + queuename + " legen.")
+        add_text_to_queue_states("3. Kindknoten von *" + v.label + "* auf " + queuename + " legen.")
 
         outputState()
-        ga.next_step()
-        gb.next_step()
+        graph_animation.next_step()
 
+graphs_a = graph_animation.graphs("circo")
+files1 = render(graphs_a, basename + '_graph', 'svg')
 
+graphs_b = decision_tree_animation.graphs("dot")
+files2 = render(graphs_b, basename + '_tree', 'svg')
 
-graphs_a = ga.graphs("circo")
-files1 = render( graphs_a, basename + '_graph', 'svg' )
-
-graphs_b = gb.graphs("dot")
-files2 = render( graphs_b, basename + '_tree', 'svg' )
-
-slides( files1, files2, queueStates, basename)
+slides(files1, files2, queueStates, basename)
