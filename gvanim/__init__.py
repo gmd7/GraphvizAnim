@@ -18,7 +18,5 @@
 # from __future__ import absolute_import
 
 from gvanim.animation import Animation
-from gvanim.render import render, gif, slides, addQueueState
+from gvanim.render import render, gif, slides
 from gvanim.graph import *
-
-

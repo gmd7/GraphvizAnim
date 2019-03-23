@@ -21,7 +21,7 @@ from email.utils import quote
 import shlex
 
 from gvanim import action
-
+from gvanim.graph import Graph
 
 class ParseException(Exception):
     pass
@@ -61,10 +61,21 @@ class Step(object):
         return ''
 
     def edge_format(self, e):
-        if e in self.hE:
-            return '[color={}, label={}]'.format(self.hE[e], e.weight)
+        # print( "edge format: 64 " + str(e) )
+        for ed in self.hE:
+            print(ed)
+        if e in self.hE.keys():
+            if e.weight is None:
+                erg = '[color="{}"]'.format(self.hE[e])
+            else:
+                erg = '[color="{}", label="{}"]'.format(self.hE[e], e.weight)
+            return erg
         elif e in self.E:
-            return ''
+            # print("edge format: 71 " + str(e) + str(len(self.hE.values())))
+            if e.weight is None:
+                return ''
+            else:
+                return '[label="{}"]'.format(e.weight)
         return '[style=invis]'
 
     def __repr__(self):
@@ -98,6 +109,7 @@ class Animation(object):
         self._actions.append(action.AddEdge(edge, **kwargs))
 
     def highlight_edge(self, edge, color='red'):
+        print ( "highlight_edge: animation: 109" )
         self._actions.append(action.HighlightEdge(edge, color=color))
 
     def remove_edge(self, u, v):
@@ -140,11 +152,18 @@ class Animation(object):
             E |= step.E
         graphs = []
         for n, s in enumerate(steps):
-            graph = ['digraph G {']
+            edge_symbol = "--"
+            graph = ['strict graph G {']
+            if isinstance(graph, Graph):
+                edge_symbol = "->"
+                graph = ['digraph G {']
+
             graph.append('layout="{}"'.format(layout))
             graph.append('ordering=out;')
-            for v in V: graph.append('"{}" {};'.format(quote(str(v)), s.node_format(v)))
-            for e in E: graph.append('"{}" -> "{}" {};'.format(quote(str(e[0])), quote(str(e[1])), s.edge_format(e)))
+            # for e in E: print(type(e))
+            for v in V: graph.append('"{}" {};'.format(quote(v.getNodeName()), s.node_format(v)))
+            for e in E: graph.append('"{}" {} "{}" {};'.format(quote(e.frm.getNodeName()), edge_symbol, quote(e.to.getNodeName()), s.edge_format(e)))
             graph.append('}')
+            print('\n'.join(graph))
             graphs.append('\n'.join(graph))
         return graphs

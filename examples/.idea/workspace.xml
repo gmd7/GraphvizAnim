@@ -1,0 +1,379 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="49e8c96f-bac1-4db2-be37-6c479ff5677f" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/../.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/search.py" beforeDir="false" afterPath="$PROJECT_DIR$/search.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/search_bfs_3.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/search_bfs_3_graph_000.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/search_bfs_3_graph_001.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/search_bfs_3_graph_002.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/search_bfs_3_graph_003.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/search_bfs_3_graph_004.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/search_bfs_3_graph_005.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/search_bfs_3_graph_006.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/search_bfs_3_graph_007.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/search_bfs_3_graph_008.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/search_bfs_3_graph_009.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/search_bfs_3_graph_010.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/search_bfs_3_graph_011.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/search_bfs_3_graph_012.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/search_bfs_3_graph_013.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/search_bfs_3_graph_014.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/search_bfs_3_graph_015.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/search_bfs_3_graph_016.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/search_bfs_3_graph_017.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/search_bfs_3_graph_018.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/search_bfs_3_graph_019.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/search_bfs_3_graph_020.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/search_bfs_3_graph_021.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/search_bfs_3_tree_000.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/search_dfs_1.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/search_dfs_1_graph_000.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/search_dfs_1_graph_001.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/search_dfs_1_graph_002.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/search_dfs_1_graph_003.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/search_dfs_1_graph_004.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/search_dfs_1_graph_005.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/search_dfs_1_graph_006.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/search_dfs_1_graph_007.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/search_dfs_1_graph_008.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/search_dfs_1_graph_009.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/search_dfs_1_graph_010.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/search_dfs_1_graph_011.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/search_dfs_1_graph_012.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/search_dfs_1_graph_013.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/search_dfs_1_graph_014.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/search_dfs_1_graph_015.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/search_dfs_1_graph_016.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/search_dfs_1_graph_017.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/search_dfs_1_graph_018.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/search_dfs_1_tree_000.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/search_dfs_1_tree_001.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/search_dfs_1_tree_002.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/search_dfs_1_tree_003.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/search_dfs_1_tree_004.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/search_dfs_1_tree_005.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/search_dfs_1_tree_006.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/search_dfs_1_tree_007.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/search_dfs_1_tree_008.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/search_dfs_1_tree_009.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/search_dfs_1_tree_010.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/search_dfs_1_tree_011.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/search_dfs_1_tree_012.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/search_dfs_1_tree_013.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/search_dfs_1_tree_014.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/search_dfs_1_tree_015.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/search_dfs_1_tree_016.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/search_dfs_1_tree_017.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/search_dfs_1_tree_018.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../gvanim/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/../gvanim/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../gvanim/action.py" beforeDir="false" afterPath="$PROJECT_DIR$/../gvanim/action.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../gvanim/animation.py" beforeDir="false" afterPath="$PROJECT_DIR$/../gvanim/animation.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../gvanim/graph.py" beforeDir="false" afterPath="$PROJECT_DIR$/../gvanim/graph.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../gvanim/render.py" beforeDir="false" afterPath="$PROJECT_DIR$/../gvanim/render.py" afterDir="false" />
+    </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/search.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="337">
+              <caret line="180" column="105" selection-start-line="180" selection-start-column="105" selection-end-line="180" selection-end-column="105" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>raph</find>
+      <find>fringe</find>
+      <find>fringe.put</find>
+      <find>3.</find>
+      <find>von</find>
+      <find>highlight_node</find>
+      <find>Kind</find>
+      <find>state_table_table_row</find>
+      <find>besucht</find>
+    </findStrings>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/gvanim/animation.py" />
+        <option value="$PROJECT_DIR$/gvanim/graph.py" />
+        <option value="$PROJECT_DIR$/gvanim/render.py" />
+        <option value="$PROJECT_DIR$/search.py" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectFrameBounds" extendedState="4">
+    <option name="x" value="116" />
+    <option name="width" value="1804" />
+    <option name="height" value="1086" />
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectView">
+    <navigator proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="examples" type="b2602c69:ProjectViewProjectNode" />
+              <item name="examples" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="examples" type="b2602c69:ProjectViewProjectNode" />
+              <item name="examples" type="462c0819:PsiDirectoryNode" />
+              <item name="gvanim" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="Scope" />
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="settings.editor.selected.configurable" value="preferences.keymap" />
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager" selected="Python.search">
+    <configuration name="graph" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="examples" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/gvanim" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/gvanim/graph.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="render" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="examples" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/gvanim" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/gvanim/render.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="search" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="examples" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/search.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.search" />
+        <item itemvalue="Python.graph" />
+        <item itemvalue="Python.render" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="49e8c96f-bac1-4db2-be37-6c479ff5677f" name="Default Changelist" comment="" />
+      <created>1553289287988</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1553289287988</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="116" y="0" width="1804" height="1086" extended-state="4" />
+    <editor active="true" />
+    <layout>
+      <window_info id="Favorites" order="0" side_tool="true" />
+      <window_info content_ui="combo" id="Project" order="1" weight="0.26178306" />
+      <window_info id="Structure" order="2" side_tool="true" weight="0.25" />
+      <window_info anchor="bottom" id="Terminal" order="0" />
+      <window_info anchor="bottom" id="Event Log" order="1" side_tool="true" />
+      <window_info anchor="bottom" id="Python Console" order="2" weight="0.32998884" />
+      <window_info anchor="bottom" id="Message" order="3" />
+      <window_info anchor="bottom" id="Find" order="4" />
+      <window_info anchor="bottom" id="Version Control" order="5" weight="0.32998884" />
+      <window_info active="true" anchor="bottom" id="Run" order="6" visible="true" weight="0.14314115" />
+      <window_info anchor="bottom" id="Debug" order="7" weight="0.4916388" />
+      <window_info anchor="bottom" id="Cvs" order="8" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="9" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="10" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+    </layout>
+    <layout-to-restore>
+      <window_info id="Favorites" order="0" side_tool="true" />
+      <window_info content_ui="combo" id="Project" order="1" visible="true" weight="0.26178306" />
+      <window_info id="Structure" order="2" side_tool="true" weight="0.25" />
+      <window_info anchor="bottom" id="Terminal" order="0" />
+      <window_info anchor="bottom" id="Event Log" order="1" side_tool="true" />
+      <window_info anchor="bottom" id="Python Console" order="2" weight="0.32998884" />
+      <window_info anchor="bottom" id="Message" order="3" />
+      <window_info anchor="bottom" id="Find" order="4" />
+      <window_info anchor="bottom" id="Version Control" order="5" weight="0.32998884" />
+      <window_info active="true" anchor="bottom" id="Run" order="6" visible="true" weight="0.14381272" />
+      <window_info anchor="bottom" id="Debug" order="7" weight="0.4916388" />
+      <window_info anchor="bottom" id="Cvs" order="8" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="9" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="10" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+    </layout-to-restore>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/search.py</url>
+          <line>194</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/search.py</url>
+          <line>125</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+        <line-breakpoint suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/search.py</url>
+          <line>100</line>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+        <line-breakpoint suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/search.py</url>
+          <line>90</line>
+          <option name="timeStamp" value="4" />
+        </line-breakpoint>
+        <line-breakpoint suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/search.py</url>
+          <line>116</line>
+          <option name="timeStamp" value="5" />
+        </line-breakpoint>
+        <line-breakpoint suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/search.py</url>
+          <line>112</line>
+          <option name="timeStamp" value="6" />
+        </line-breakpoint>
+        <line-breakpoint suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/search.py</url>
+          <line>218</line>
+          <option name="timeStamp" value="7" />
+        </line-breakpoint>
+        <line-breakpoint suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/search.py</url>
+          <line>222</line>
+          <option name="timeStamp" value="8" />
+        </line-breakpoint>
+        <line-breakpoint suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/gvanim/graph.py</url>
+          <line>169</line>
+          <option name="timeStamp" value="9" />
+        </line-breakpoint>
+        <line-breakpoint suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/gvanim/graph.py</url>
+          <line>167</line>
+          <option name="timeStamp" value="10" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/gvanim/animation.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="236">
+          <caret line="155" column="29" selection-start-line="155" selection-start-column="29" selection-end-line="155" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gvanim/graph.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="5577">
+          <caret line="169" selection-start-line="169" selection-end-line="169" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gvanim/render.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="623">
+          <caret line="86" column="16" selection-start-line="86" selection-start-column="16" selection-end-line="86" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/search.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="337">
+          <caret line="180" column="105" selection-start-line="180" selection-start-column="105" selection-end-line="180" selection-end-column="105" />
+        </state>
+      </provider>
+    </entry>
+  </component>
+</project>

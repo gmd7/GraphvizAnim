@@ -53,28 +53,31 @@ class RemoveNode( object ):
 
 class AddEdge( object ):
 	def __init__( self, edge, **kwargs ):
+		print("AddEdge: action: 56")
 		self.u = edge.getFrom()
 		self.v = edge.getTo()
-		self.weight = edge.getWeight()
+		self.e = edge
 	def __call__( self, steps ):
 		steps[ -1 ].V.add( self.u )
 		steps[ -1 ].V.add( self.v )
-		steps[ -1 ].E.add( ( self.u, self.v, self.weight ) )
+		steps[ -1 ].E.add( self.e )
 
-class HighlightEdge( AddEdge ):
+class HighlightEdge( object ):
 	def __init__( self, edge, color = 'red' ):
-		super(AddEdge, self).__init__(edge)
+		print("HighlightEdge: action: 67")
+		self.edge = edge
+		self.color = color
 	def __call__( self, steps ):
-		super(AddEdge, self).__call__(steps)
-		steps[ -1 ].hE[ ( self.u, self.v ) ] = self.color
+		print("HighlightEdge: action: 71")
+		steps[ -1 ].E.add( self.edge )
+		steps[ -1 ].hE[ self.edge ] = self.color
 
 class RemoveEdge( object ):
 	def __init__( self, edge ):
-		self.u = edge.getFrom()
-		self.v = edge.getTo()
+		self.edge = edge
 	def __call__( self, steps ):
-		steps[ -1 ].E.discard( ( self.u, self.v ) )
+		steps[ -1 ].E.discard( self.edge )
 		try:
-			del steps[ -1 ].hE[ ( self.u, self.v ) ]
+			del steps[ -1 ].hE[ self.edge ]
 		except KeyError:
 			pass
