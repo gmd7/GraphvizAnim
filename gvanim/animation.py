@@ -21,129 +21,149 @@ from email.utils import quote
 import shlex
 
 from gvanim import action
+from gvanim.graph import Graph
 
-class ParseException( Exception ):
-	pass
+class ParseException(Exception):
+    pass
 
-class Step( object ):
 
-	def __init__( self, step = None , copy_hV = True, copy_hE = False):
-		if step:
-			self.V = step.V.copy()
-			self.E = step.E.copy()
-			self.L = step.L.copy()
-			if copy_hV:
-				self.hV = step.hV.copy()
-			else:
-				self.hV = dict()
-			if copy_hE:
-				self.hE = step.hE.copy()
-			else:
-				self.hE = dict()
-		else:
-			self.V = set()
-			self.E = set()
-			self.L = dict()
-			self.hV = dict()
-			self.hE = dict()
+class Step(object):
 
-	def node_format( self, v ):
-		fmt = []
-		try:
-			fmt.append( 'label="{}"'.format( self.L[ v ] ) )
-		except KeyError:
-			pass
-		if v in self.hV:
-			fmt.append( 'color={}'.format( self.hV[ v ] ) )
-		elif v not in self.V:
-			fmt.append( 'style=invis' )
-		if fmt: return '[{}]'.format( ','.join( fmt ) )
-		return ''
+    def __init__(self, step=None, copy_hV=True, copy_hE=False):
+        if step:
+            self.V = step.V.copy()
+            self.E = step.E.copy()
+            if copy_hV:
+                self.hV = step.hV.copy()
+            else:
+                self.hV = dict()
+            if copy_hE:
+                self.hE = step.hE.copy()
+            else:
+                self.hE = dict()
+        else:
+            self.V = set()
+            self.E = set()
+            self.hV = dict()
+            self.hE = dict()
 
-	def edge_format( self, e ):
-		if e in self.hE:
-			return '[color={}]'.format( self.hE[ e ] )
-		elif e in self.E:
-			return ''
-		return '[style=invis]'
+    def node_format(self, v):
+        fmt = []
+        try:
+            fmt.append('label="{}"'.format(v.label))
+        except KeyError:
+            pass
+        if v in self.hV:
+            fmt.append('color={}'.format(self.hV[v]))
+        elif v not in self.V:
+            fmt.append('style=invis')
+        if fmt: return '[{}]'.format(','.join(fmt))
+        return ''
 
-	def __repr__( self ):
-		return '{{ V = {}, E = {}, hV = {}, hE = {}, L = {} }}'.format( self.V, self.E, self.hV, self.hE, self.L )
+    def edge_format(self, e):
+        # print( "edge format: 64 " + str(e) )
+        for ed in self.hE:
+            print(ed)
+        if e in self.hE.keys():
+            if e.weight is None:
+                erg = '[color="{}"]'.format(self.hE[e])
+            else:
+                erg = '[color="{}", label="{}"]'.format(self.hE[e], e.weight)
+            return erg
+        elif e in self.E:
+            # print("edge format: 71 " + str(e) + str(len(self.hE.values())))
+            if e.weight is None:
+                return ''
+            else:
+                return '[label="{}"]'.format(e.weight)
+        return '[style=invis]'
 
-class Animation( object ):
+    def __repr__(self):
+        return '{{ V = {}, E = {}, hV = {}, hE = {} }}'.format(self.V, self.E, self.hV, self.hE)
 
-	def __init__( self ):
-		self._actions = []
 
-	def next_step( self, clean = False):
-		self._actions.append( action.NextStep( clean ) )
+class Animation(object):
 
-	def add_node( self, v ):
-		self._actions.append( action.AddNode( v ) )
+    def __init__(self):
+        self._actions = []
 
-	def highlight_node( self, v, color = 'red' ):
-		self._actions.append( action.HighlightNode( v, color = color ) )
+    def next_step(self, clean=False):
+        self._actions.append(action.NextStep(clean))
 
-	def label_node( self, v, label ):
-		self._actions.append( action.LabelNode( v, label ) )
+    def add_node(self, v):
+        self._actions.append(action.AddNode(v))
 
-	def unlabel_node( self, v ):
-		self._actions.append( action.UnlabelNode( v ) )
+    def highlight_node(self, v, color='red'):
+        self._actions.append(action.HighlightNode(v, color=color))
 
-	def remove_node( self, v ):
-		self._actions.append( action.RemoveNode( v ) )
+    def label_node(self, v, label):
+        self._actions.append(action.LabelNode(v, label))
 
-	def add_edge( self, u, v , **kwargs):
-		self._actions.append( action.AddEdge( u, v, **kwargs ) )
+    def unlabel_node(self, v):
+        self._actions.append(action.UnlabelNode(v))
 
-	def highlight_edge( self, u, v, color = 'red' ):
-		self._actions.append( action.HighlightEdge( u, v, color = color ) )
+    def remove_node(self, v):
+        self._actions.append(action.RemoveNode(v))
 
-	def remove_edge( self, u, v ):
-		self._actions.append( action.RemoveEdge( u, v ) )
+    def add_edge(self, edge, **kwargs):
+        self._actions.append(action.AddEdge(edge, **kwargs))
 
-	def parse( self, lines ):
-		action2method = {
-			'ns' : self.next_step,
-			'an' : self.add_node,
-			'hn' : self.highlight_node,
-			'ln' : self.label_node,
-			'un' : self.unlabel_node,
-			'rn' : self.remove_node,
-			'ae' : self.add_edge,
-			'he' : self.highlight_edge,
-			're' : self.remove_edge,
-		}
-		for line in lines:
-			parts = shlex.split( line.strip(), True )
-			if not parts: continue
-			action, params = parts[ 0 ], parts[ 1: ]
-			try:
-				action2method[ action ]( *params )
-			except KeyError:
-				raise ParseException( 'unrecognized command: {}'.format( action ) )
-			except TypeError:
-				raise ParseException( 'wrong number of parameters: {}'.format( line.strip() ) )
+    def highlight_edge(self, edge, color='red'):
+        print ( "highlight_edge: animation: 109" )
+        self._actions.append(action.HighlightEdge(edge, color=color))
 
-	def steps( self ):
-		steps = [ Step() ]
-		for action in self._actions:
-			action( steps )
-		return steps
+    def remove_edge(self, u, v):
+        self._actions.append(action.RemoveEdge(u, v))
 
-	def graphs( self, layout = 'neato' ):
-		steps = self.steps()
-		V, E = set(), set()
-		for step in steps:
-			V |= step.V
-			E |= step.E
-		graphs = []
-		for n, s in enumerate( steps ):
-			graph = [ 'digraph G {' ]
-			graph.append('layout="{}"'.format(layout))
-			graph.append('ordering=out;')
-			for v in V: graph.append( '"{}" {};'.format( quote( str( v ) ), s.node_format( v ) ) )
-			for e in E: graph.append( '"{}" -> "{}" {};'.format( quote( str( e[ 0 ] ) ), quote( str( e[ 1 ] ) ), s.edge_format( e ) ) )
-			graph.append( '}' )
-			graphs.append( '\n'.join( graph ) )
-		return graphs
+    def parse(self, lines):
+        action2method = {
+            'ns': self.next_step,
+            'an': self.add_node,
+            'hn': self.highlight_node,
+            'ln': self.label_node,
+            'un': self.unlabel_node,
+            'rn': self.remove_node,
+            'ae': self.add_edge,
+            'he': self.highlight_edge,
+            're': self.remove_edge,
+        }
+        for line in lines:
+            parts = shlex.split(line.strip(), True)
+            if not parts: continue
+            action, params = parts[0], parts[1:]
+            try:
+                action2method[action](*params)
+            except KeyError:
+                raise ParseException('unrecognized command: {}'.format(action))
+            except TypeError:
+                raise ParseException('wrong number of parameters: {}'.format(line.strip()))
+
+    def steps(self):
+        steps = [Step()]
+        for action in self._actions:
+            action(steps)
+        return steps
+
+    def graphs(self, layout='neato'):
+        steps = self.steps()
+        V, E = set(), set()
+        for step in steps:
+            V |= step.V
+            E |= step.E
+        graphs = []
+        for n, s in enumerate(steps):
+            edge_symbol = "--"
+            graph = ['strict graph G {']
+            if isinstance(graph, Graph):
+                edge_symbol = "->"
+                graph = ['digraph G {']
+
+            graph.append('layout="{}"'.format(layout))
+            graph.append('ordering=out;')
+            # for e in E: print(type(e))
+            for v in V: graph.append('"{}" {};'.format(quote(v.getNodeName()), s.node_format(v)))
+            for e in E: graph.append('"{}" {} "{}" {};'.format(quote(e.frm.getNodeName()), edge_symbol, quote(e.to.getNodeName()), s.edge_format(e)))
+            graph.append('}')
+            print('\n'.join(graph))
+            graphs.append('\n'.join(graph))
+        return graphs
